@@ -1,5 +1,8 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     kotlin("jvm") version "1.3.70"
+    id(Danger.ktlintGradle) version Danger.ktlintGradleVersion
 }
 
 group = "io.github.brokenmanager.recoric"
@@ -19,5 +22,14 @@ tasks {
     }
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
+    }
+}
+
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
+    coloredOutput.set(true)
+    reporters {
+        reporter(ReporterType.CHECKSTYLE)
     }
 }
