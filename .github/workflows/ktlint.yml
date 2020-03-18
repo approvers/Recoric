@@ -1,4 +1,4 @@
-name: CI
+name: ktlint
 on:
   pull_request:
     branches:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup ruby
-        uses: actions/setup-ruby@1
+        uses: ruby/setup-ruby@1
         with:
           ruby-version: '2.7'
           architecture: 'x64'
