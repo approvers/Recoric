@@ -1,0 +1,25 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup ruby
+        uses: actions/setup-ruby@1
+        with:
+          ruby-version: '2.7'
+          architecture: 'x64'
+      - name: Install danger
+        run: |
+          gem install danger -v '>= 5.10.3'
+          gem install danger-checkstyle_format
+      - name: Run ktlintCheck
+        run: ./gradlew ktlintCheck
+      - name: Run danger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: danger
